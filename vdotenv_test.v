@@ -43,7 +43,7 @@ fn test_map() {
 
 fn test_load_env_required_keys() {
 	vdotenv.load_env(required_keys: ['VDOTENV_ENVR']) or {
-		if err.msg.contains('VDOTENV_ENVR') {
+		if err.msg().contains('VDOTENV_ENVR') {
 			assert true
 		} else {
 			panic(err)
@@ -74,7 +74,7 @@ fn test_required_keys_cannot_be_used_with_multiple_path() {
 		paths: ['.env', '.env.example']
 		required_keys: ['VDOTENV_ENVR']
 	) or {
-		if err.msg == 'Required keys cannot be set with multple file paths' {
+		if err.msg() == 'Required keys cannot be set with multple file paths' {
 			assert true
 		} else {
 			panic(err)
@@ -132,4 +132,5 @@ fn test_load_env_app_vars() {
 	assert os.getenv('DB_DATABASE') == 'examplexloc'
 	assert os.getenv('DB_USER') == 'examplexloc'
 	assert os.getenv('DB_SCHEMA') == ''
+	assert os.getenv('CODE_STYLE_PIPELINE') == 'phpcs:app phpcs:cli'
 }
