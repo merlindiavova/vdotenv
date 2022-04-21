@@ -127,7 +127,6 @@ fn load_env_file(path string, override bool, strict bool, required_keys ...strin
 		mut value := value_hint
 
 		split := value_hint.split('\${')
-
 		for hint in split {
 			if hint == '' {
 				continue
@@ -135,6 +134,10 @@ fn load_env_file(path string, override bool, strict bool, required_keys ...strin
 
 			position := hint.index('}') or { 0 }
 			env_name_hint := hint.substr(0, position)
+			if env_name_hint == '' {
+				continue
+			}
+
 			env_value := os.getenv_opt(env_name_hint) or {
 				if strict {
 					return error('Env var [$env_name_hint] not set.')
