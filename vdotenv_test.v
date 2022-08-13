@@ -74,7 +74,7 @@ fn test_required_keys_cannot_be_used_with_multiple_path() {
 		paths: ['.env', '.env.example']
 		required_keys: ['VDOTENV_ENVR']
 	) or {
-		if err.msg() == 'Required keys cannot be set with multple file paths' {
+		if err.msg() == 'Required keys cannot be set with multiple file paths' {
 			assert true
 		} else {
 			panic(err)

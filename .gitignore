@@ -7,3 +7,6 @@ bin/vdotenv
 *.dylib
 *.dll
 vls.log
+.env
+.env.example
+.env.extended

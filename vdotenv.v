@@ -7,6 +7,7 @@ const (
 	exit_read_failed = 21
 )
 
+[params]
 pub struct LoadEnvConfig {
 	paths         []string
 	override      bool
@@ -35,8 +36,9 @@ pub fn load_env(c LoadEnvConfig) ?map[string]string {
 		return load_env_file(c.paths[0], c.override, c.strict, ...c.required_keys) or { return err }
 	} else if c.paths.len > 1 {
 		if c.required_keys.len > 0 {
-			return error('Required keys cannot be set with multple file paths')
+			return error('Required keys cannot be set with multiple file paths')
 		}
+
 		for i := 0; i < c.paths.len; i++ {
 			path := c.paths[i]
 			vars := load_env_file(path, c.override, c.strict, ...c.required_keys) or { return err }
